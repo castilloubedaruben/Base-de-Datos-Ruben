@@ -41,7 +41,7 @@ select situacion_laboral,avg(extract(year from now())-extract(year from fecha_na
 -- 5. Muestra el nombre de la persona parada de más edad.
     select nombre from personas where (extract(year from now())-extract(year from fecha_nacimiento)) = (select max(extract(year from now())-extract(year from fecha_nacimiento)) as edad_maxima from personas where situacion_laboral = "estudiante");
 -- 6. Dime la provincia con la máxima edad media.
-
+    select provincia from personas where (extract(year from now())-extract(year from fecha_nacimiento)) = (select avg(extract(year from now())-extract(year from fecha_nacimiento)) as edad_media from personas group by provincia);
 -- 7. Dime los hijos del ciudadano con id 1190
 
 -- 8.  Muestra los nietos del ciudadano con id = 1190

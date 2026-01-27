@@ -64,6 +64,7 @@ WHERE salario > 3000 AND edad < 40;
 SELECT * FROM empleados WHERE nombre LIKE 'M%'; -- empieza por M
 SELECT * FROM clientes WHERE apellido LIKE '%ez'; -- termina por ez
 SELECT * FROM empleados WHERE nombre LIKE '%an%'; -- contiene an
+SELECT * FROM empleados WHERE nombre NOT LIKE '%an%'; -- NO contiene an
 SELECT * FROM empleados WHERE nombre LIKE '___o'; -- 4 huecos el ultimo es una o
 ```
 📋 IN
