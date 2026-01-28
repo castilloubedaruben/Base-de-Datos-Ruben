@@ -171,15 +171,51 @@ SELECT FLOOR(1 + (RAND()*100));
 SELECT NOW();
 SELECT DATEDIFF(NOW(), fecha_ingreso) FROM empleados;
 SELECT EXTRACT(YEAR FROM fecha_ingreso) FROM empleados;
+SELECT DATE_FORMAT(campo a cambiar, '%h:%i:%s %p'); -- para cambiar a formato 12horas
 ```
 ## 🔹 13. Subconsultas
 
-Consulta dentro de otra consulta.
-
+**Subconsultas Escalares: Devuelven un único valor.**
 ```sql
-SELECT nombre 
-FROM empleados 
+SELECT nombre
+FROM empleados
 WHERE salario > (SELECT AVG(salario) FROM empleados);
+``` 
+
+**Subconsultas de Columna: Devuelven una columna con múltiples valores**
+```sql
+SELECT nombre
+FROM empleados
+WHERE departamento IN (SELECT departamento FROM departamentos);
+```
+
+**Subconsultas de Tabla: Devuelven una tabla completa.**
+```sql
+SELECT *
+FROM (SELECT nombre, salario FROM empleados WHERE salario > 4000) AS subconsulta;
+```
+
+**¿Dónde se Usan las Subconsultas?**
+
+En WHERE:
+```sql
+SELECT nombre
+FROM empleados
+WHERE salario = (SELECT MAX(salario) FROM empleados);
+```
+
+En FROM:
+```sql
+SELECT sub.departamento, sub.salario_promedio
+FROM (SELECT departamento, AVG(salario) AS salario_promedio FROM empleados GROUP BY departamento) AS sub;
+```
+
+En HAVING:
+```sql
+SELECT departamento, SUM(salario) AS total_salarios
+FROM empleados
+GROUP BY departamento
+HAVING SUM(salario) > (SELECT AVG(salario) FROM empleados);
 ```
 
 # Tabla Resumen de Comandos

@@ -43,15 +43,15 @@ select situacion_laboral,avg(extract(year from now())-extract(year from fecha_na
 -- 6. Dime la provincia con la máxima edad media.
     select provincia from personas where (extract(year from now())-extract(year from fecha_nacimiento)) = (select avg(extract(year from now())-extract(year from fecha_nacimiento)) as edad_media from personas group by provincia);
 -- 7. Dime los hijos del ciudadano con id 1190
-
+    select num_hijos from personas where id = 1190;
 -- 8.  Muestra los nietos del ciudadano con id = 1190
-
+    select id from personas where padre in (select id from personas where padre = 1190);
 -- 9.  Muestra la madre con más hijos
-
+    select nombre,num_hijos from personas where num_hijos = (select max(num_hijos) from personas) and sexo = "M";
 -- 10. Muestra la media de hijos por hombre
-
+    select round(avg(num_hijos),2) from personas where sexo ="H";
 -- 11. Dime la media de hijos de personas con menos de 30 años.
-
+    select round(avg(num_hijos),2) from personas where (year(now())-(year(fecha_nacimiento))<=30);
 -- 12. Muestra el valor de numero de hijos que más se repite entre las mujeres.
 
 -- 13. Dime la media de edad de las mujeres sin hijos de Sevilla provincia

@@ -140,20 +140,21 @@ INSERT INTO itinerario (id_procesion, punto, hora_paso) VALUES
 -- 34. Mostrar las hermandades ordenadas por el número de costaleros en orden ascendente.
     select nombre,numero_costaleros from hermandad order by numero_costaleros asc;
 -- 35. Listar los nombres de los pasos en los que la palabra 'Virgen' no aparece.
-
+    select nombre from paso where nombre not like "%Virgen%";
 -- 36. Calcular la diferencia entre el peso máximo y mínimo de los pasos.
-
+    select (max(peso)-min(peso)) from paso;
 -- 37. Mostrar solo las procesiones cuyo nombre no empieza con 'La'.
-
+    select nombre from procesion where nombre like "La%";
 -- 38. Formatear la hora de inicio de las procesiones en formato de 12 horas con AM/PM.
-
+    select DATE_FORMAT(hora_inicio, '%h:%i:%s') from procesion; 
 -- 39. Mostrar solo la hora (sin minutos ni segundos) del paso por cada punto del itinerario.
-
+    select extract(hour from hora_inicio) from procesion;
 -- 40. Seleccionar las procesiones que tienen su inicio en las próximas 6 horas a partir de la fecha y hora actual.
-
+    select datediff(now(),hora_inicio) as diferencia_horaria from procesion;
 -- EXTRAS
 -- 41. Redondear el peso de los pasos a la centena más cercana.
-
+    select ceil(peso) from paso;
 -- 42. Mostrar el peso de los pasos dividido entre 1000, con dos decimales.
-
+    select round(peso/1000,2) from paso;
 -- 43. Generar un número aleatorio entre 1 y 100.
+SELECT FLOOR(1 + (RAND()*100));
