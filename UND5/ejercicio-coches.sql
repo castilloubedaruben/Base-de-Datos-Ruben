@@ -29,9 +29,9 @@ select personas.nombre, personas.ocupacion, coches.* from coches LEFT JOIN perso
 -- 11. Número de coches por persona
 SELECT personas.nombre, COUNT(*) as numero_coches_persona from personas INNER JOIN coches on coches.id_dueño=personas.id GROUP BY personas.id;
 -- 12. Marca más común entre personas de cada provincia
-
+SELECT personas.provincia, coches.marca, COUNT(*) from personas INNER JOIN coches on personas.id=coches.id_dueño GROUP BY coches.marca, personas.provincia ORDER BY personas.provincia;
 -- 13. Promedio de edad de dueños por marca de coche
-
+SELECT 
 -- 14. Total de ingresos de dueños por color de coche
 
 -- 15. Municipios con más coches
@@ -41,6 +41,6 @@ SELECT personas.nombre, COUNT(*) as numero_coches_persona from personas INNER JO
 
 -- 16. Padres e hijos y sus coches
 
--- 17. Parejas con algún hijo y sus coches
+-- 17. Parejas con algún hijo y sus coches0
 
 -- 18. Personas de la misma familia con más de dos coches
