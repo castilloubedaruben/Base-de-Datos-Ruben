@@ -42,5 +42,6 @@ select personas.municipio, COUNT(*) as total_coches from personas INNER JOIN coc
 -- 16. Padres e hijos y sus coches
 
 -- 17. Parejas con algún hijo y sus coches0
-select * from personas;
+SELECT padre, madre, count(coches.matricula) from personas JOIN coches on coches.id_dueño in (madre,padre) where madre is not null and padre is not null group by padre,madre;
 -- 18. Personas de la misma familia con más de dos coches
+SELECT padre, madre FROM personas JOIN coches ON coches.id_dueño in (madre,padre,personas.id) WHERE padre IS NOT NULL and madre IS NOT NULL GROUP BY padre, madre HAVING COUNT(coches.id)>2;
