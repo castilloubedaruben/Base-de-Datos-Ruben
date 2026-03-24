@@ -77,7 +77,7 @@ SELECT equipos.nombre, AVG(jugadores.salario_anual) from equipos JOIN jugadores 
 -- 5. Equipos sin jugadores registrados
 SELECT equipos.nombre, jugadores.nombre from equipos LEFT JOIN jugadores on equipos.id_equipo=jugadores.id_equipo WHERE jugadores.id_equipo=NULL;
 
--- 6. Jugadores por posición en cada equipo
+-- 6. Numero de jugadores por posición en cada equipo
 SELECT equipos.nombre, jugadores.posicion from equipos LEFT JOIN jugadores on equipos.id_equipo=jugadores.id_equipo ORDER BY equipos.id_equipo;
 
 -- 7. Comparativa de presupuestos vs gasto en jugadores

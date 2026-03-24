@@ -152,8 +152,7 @@ SELECT publicaciones.descripcion, usuarios.* from usuarios LEFT JOIN publicacion
 
 
 -- 4. Usuarios sin publicaciones
-SELECT usuarios.nombre_usuario, COUNT(publicaciones.*) as total_publicaciones from usuarios JOIN publicaciones on usuarios.id_usuario=publicaciones.id_usuario GROUP BY usuarios.nombre_usuario ASC;
-
+SELECT usuarios.* FROM usuarios LEFT JOIN publicaciones ON usuarios.id_usuario = publicaciones.id_usuario WHERE publicaciones.id_publicacion is null;
 -- 5. Publicaciones sin usuario asociado (datos orfanos)
 SELECT publicaciones.* from publicaciones JOIN usuarios on usuarios.id_usuario=publicaciones.id_usuario WHERE usuarios.id_usuario=NULL;
 
@@ -169,13 +168,13 @@ SELECT publicaciones.numero_likes, usuarios.* FROM publicaciones JOIN usuarios O
 SELECT usuarios.*, seguidores.* FROM usuarios LEFT JOIN seguidores on usuarios.id_usuario=seguidores.id_seguido;
 
 -- 10. RIGHT JOIN - Quién sigue a cada usuario (todos los seguimientos activos)
-
+SELECT usuarios.nombre_usuario, seguidores.id_seguidor FROM usuarios JOIN seguidores ON usuarios.id_usuario=seguidores.id_seguido;
 
 -- 12. Usuarios sin seguidores (LEFT JOIN)
-
+select usuarios.nombre_usuario, COUNT(seguidores.id_seguidor) as total_seguidores FROM usuarios JOIN seguidores ON usuarios.id_usuario=seguidores.id_seguido GROUP BY usuarios.nombre_usuario HAVING COUNT(seguidores.id_seguidor) = 0 ;
 
 -- 13. Top influencers (usuarios más seguidos)
-
+select usuarios.nombre_usuario, COUNT(seguidores.id_seguidor) as total_seguidores FROM usuarios JOIN seguidores ON usuarios.id_usuario=seguidores.id_seguido GROUP BY usuarios.nombre_usuario ORDER BY total_seguidores desc ;
 
 -- 14. Matriz de seguimientos bidireccionales (mutua)
 
